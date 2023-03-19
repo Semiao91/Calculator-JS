@@ -6,6 +6,7 @@ let active = false;
 let result = null;
 
 const screen = document.querySelector("#display-screen");
+const buttons = document.querySelectorAll('button');
 
 const add = (inputA, inputB) => Number(inputA) + Number(inputB);
 const subtract = (inputA, inputB) => Number(inputA) - Number(inputB);
@@ -131,4 +132,38 @@ document.addEventListener("keydown", (event) => {
   } else if (key === "Enter" || key === "=") {
     operate();
   }
+});
+
+buttons.forEach(button => {
+  button.addEventListener('click', () => {
+    switch (button.className) {
+      case 'delete':
+        backspace();
+        break;
+      case 'clear-all':
+        deleteDisplay();
+        break;
+      case 'operator':
+        setOperator(button.textContent);
+        break;
+      case 'seven':
+      case 'eight':
+      case 'nine':
+      case 'four':
+      case 'five':
+      case 'six':
+      case 'one':
+      case 'two':
+      case 'three':
+      case 'zero':
+        updateDisplay(button.textContent);
+        break;
+      case 'comma':
+        inputDecimal('.');
+        break;
+      case 'equal':
+        operate();
+        break;
+    }
+  });
 });
